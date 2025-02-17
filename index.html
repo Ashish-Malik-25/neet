@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEET Quiz & Birthday</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background: #28a745;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #218838;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Answer These Tougher NEET Questions!</h2>
+    <p id="question">Loading question...</p>
+    <button onclick="checkAnswer('yes')">Yes</button>
+    <button onclick="checkAnswer('no')">No</button>
+
+    <p id="feedback" class="hidden"></p>
+    <div id="birthdayMessage" class="hidden">
+      <h2>🎉 Happy Birthday Anuradha! 🎂</h2>
+      <p>Hope you have an amazing day!.<br> Don't be a sad sausage, cheer up! <br> All the best for your neet exam <br> Hope 5 question to sahi kiye ho. </p>
+    </div>
+  </div>
+
+  <script>
+    // Array of 10 tougher questions inspired by NEET topics
+    let questions = [
+      { q: "Is the pH of a neutral aqueous solution 7 at 25°C?", a: "yes" },
+      { q: "At standard atmospheric pressure, is the boiling point of water 100°C?", a: "yes" },
+      { q: "According to Boyle's Law, is pressure directly proportional to volume?", a: "no" },
+      { q: "Is ATP considered the primary energy currency in cells?", a: "yes" },
+      { q: "Does DNA replicate in a semi-conservative manner?", a: "yes" },
+      { q: "Is hydrochloric acid (HCl) classified as a strong acid?", a: "yes" },
+      { q: "Does the greenhouse effect result in a decrease in Earth's surface temperature?", a: "no" },
+      { q: "Is the cell membrane composed entirely of proteins?", a: "no" },
+      { q: "Does Einstein’s equation E=mc² apply exclusively to objects at rest?", a: "no" },
+      { q: "Is the molar mass of carbon dioxide (CO₂) approximately 44 g/mol?", a: "yes" }
+    ];
+    
+    let index = 0;
+    document.getElementById("question").textContent = questions[index].q;
+
+    function checkAnswer(answer) {
+      let feedback = document.getElementById("feedback");
+      if (answer === questions[index].a) {
+        feedback.textContent = "Correct!";
+        feedback.style.color = "green";
+      } else {
+        feedback.textContent = "Wrong!";
+        feedback.style.color = "red";
+      }
+      feedback.classList.remove("hidden");
+
+      setTimeout(() => {
+        index++;
+        if (index < questions.length) {
+          document.getElementById("question").textContent = questions[index].q;
+          feedback.classList.add("hidden");
+        } else {
+          // Remove the 'hidden' class from the birthday message
+          const birthdayMessageEl = document.getElementById("birthdayMessage");
+          birthdayMessageEl.classList.remove("hidden");
+          document.querySelector(".container").innerHTML = birthdayMessageEl.outerHTML;
+        }
+      }, 1000);
+    }
+  </script>
+
+</body>
+</html>
